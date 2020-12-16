@@ -1,34 +1,32 @@
 Ecomail API for Nette
 =====================
 
-Jednoduchá implementace Ecomail API pro Nette, pokrývá jen část rozsahu celého API. Za případné rozšíření budu rád, v současné chvíli jsem pro ostatní funkce neměl využití.
+Easy implementation of Ecomail.app API
 
-Autor nemá žádné spojení s firmou Ecomail ani s Nette Framework.
-
-Požadavky
+Requirements
 ------------
-- Nette 2.3 a vyšší
+- Nette 2.3 or above
 
-Instalace
+Instalation
 ------------
 
-Nejjednodušším způsobem instalace je přidat do souboru `composer.json`:
+Install with `composer.json`:
 ```
 	"require": {
 		"haltuf/ecomail-nette": "dev-master"
 	}
 ```
 
-nebo pomocí příkazu
+or
 
 ```
 composer require haltuf/ecomail-nette:@dev
 ```
 
-Použtí
+Usage
 -----
 
-Do souboru `config.neon` přidejte následující řádky:
+Add following to `config.neon`:
 
 ```
 extensions:
@@ -38,32 +36,31 @@ ecomail:
 	key: YOUR_KEY_HERE
 ```
 
-Službu si injectněte do Presenteru:
+And inject service into Presenter:
 
 ```php
 	/** @var \Ecomail\Ecomail @inject */
 	public $ecomail;
 ```
 
-A následně můžete používat:
+Then you can use:
 
 ```php
-	// získá všechny seznamy kontaktů
+	// get all lists
 	$this->ecomail->getLists();
 
-	// získá konkrétní seznam kontaktů
+	// get list
 	$this->ecomail->getList(1);
 
-	// získá odběratele newsletteru, stránkování funguje po 20
+	// get subscribers with pagination (20)
 	$this->ecomail->getSubscribers(1, $page);
 
-	// získá konkrétního odběratele ze seznamu kontaktů ID 1
+	// get subscriber from list with ID 1
 	$this->ecomail->getSubscriber(1, 'example@example.com');
 
-	// vytvoří nového odběratele, pokud existuje, tak ho upraví
-	// pro seznam všech možných hodnot se podívejte na kód funkce
+	// create or update subscriber
 	$this->ecomail->addSubscriber(1, array('email' => 'example@example.com', FALSE, TRUE, TRUE));
 
-	// smazání odběratele
+	// delete subscriber
 	$this->ecomail->deleteSubscriber(1, 'example@example.com');
 ```
