@@ -7,7 +7,7 @@ class Ecomail
 {
 	private $key;
 	
-	const URL = 'http://api2.ecomailapp.cz/';
+	const URL = 'http://api2.ecomailapp.com/';
 	
 
 	public function __construct($key) {
